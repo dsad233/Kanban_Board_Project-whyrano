@@ -1,6 +1,6 @@
 import { BoardMember } from "src/boards/entities/boardmember.entity";
 import { Comments } from "src/cards/comments/entities/comment.entity";
-import { BaseModel } from "src/common/entities/base.entity";
+import { BaseModel } from "src/common/entities/basemodel.entitiy";
 import { Column, Entity, OneToMany } from "typeorm";
 
 @Entity({
