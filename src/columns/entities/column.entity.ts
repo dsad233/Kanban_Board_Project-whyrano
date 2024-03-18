@@ -6,7 +6,7 @@ import { Color } from "src/common/types/color.type";
 import { Column, Entity, OneToMany } from "typeorm";
 
 @Entity('columns')
-export abstract class Coulm extends BaseModel {
+export class columns extends BaseModel {
 
     @IsString()
     @Column({ unsigned: true })
