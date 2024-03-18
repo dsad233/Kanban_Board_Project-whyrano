@@ -5,10 +5,8 @@ import { BoardsModule } from "./boards/boards.module";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { CommonModule } from "./common/common.module";
 import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
-
 import Joi from "joi";
 import { Module } from "@nestjs/common";
-
 const typeOrmModuleOptions = {
   useFactory: async (
     configService: ConfigService,
@@ -25,7 +23,6 @@ const typeOrmModuleOptions = {
   }),
   inject: [ConfigService],
 };
-
 @Module({
   imports: [
     ConfigModule.forRoot({
