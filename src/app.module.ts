@@ -1,64 +1,71 @@
-import { UsersModule } from "./users/users.module";
+import { ConfigModule } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import {
+  ENV_DB_DATABASE_KEY,
+  ENV_DB_HOST_KEY,
+  ENV_DB_PASSWORD_KEY,
+  ENV_DB_PORT_KEY,
+  ENV_DB_USERNAME_KEY,
+} from "./common/const/env-keys.const";
+import { Board } from "./boards/entities/board.entity";
+import { Users } from "./users/entities/user.entity";
+import { CardWorkers } from "./cards/entities/cardworker.entity";
+import { Cards } from "./cards/entities/card.entity";
+import { CheckList } from "./cards/check_lists/entities/check_list.entity";
+import { Columns } from "./columns/entities/column.entity";
+import { BaseModel } from "./common/entities/basemodel.entitiy";
+import { Check_current } from "./cards/check_lists/entities/Check_current.entity";
+import { Comments } from "./cards/comments/entities/comment.entity";
+import { AuthModule } from "./auth/auth.module";
+import { BoardsModule } from "./boards/boards.module";
 import { CardsModule } from "./cards/cards.module";
 import { ColumnsModule } from "./columns/columns.module";
-import { BoardsModule } from "./boards/boards.module";
-import { ConfigModule, ConfigService } from "@nestjs/config";
 import { CommonModule } from "./common/common.module";
-import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
-
-import Joi from "joi";
-import { Module } from "@nestjs/common";
-import { Board } from "./boards/entities/board.entity";
-import { Cards } from "./cards/entities/card.entity";
-import { Columns } from "./columns/entities/column.entity";
-import { Comments } from "./cards/comments/entities/comment.entity";
-import { Check_current } from "./cards/check_lists/entities/Check_current.entity";
-import { CheckList } from "./cards/check_lists/entities/check_list.entity";
-import { CardWorker } from "./cards/entities/cardworker.entity";
-
-const typeOrmModuleOptions = {
-  useFactory: async (
-    configService: ConfigService,
-  ): Promise<TypeOrmModuleOptions> => ({
-
-    entities: [
-      Board,
-      Cards,
-      CardWorker,
-      Columns,
-      Comments,
-      Check_current,
-      CheckList,
-    ],
-    synchronize: true,
-    logging: true,
-  }),
-  inject: [ConfigService],
-
-};
+import { UsersModule } from "./users/users.module";
+import { BoardMember } from "./boards/entities/boardmember.entity";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: ".env",
       isGlobal: true,
-      validationSchema: Joi.object({
-        JWT_SECRET_KEY: Joi.string().required(),
-        ENV_DB_HOST_KEY: Joi.string().required(),
-        ENV_DB_PORT_KEY: Joi.number().required(),
-        ENV_DB_USERNAME_KEY: Joi.string().required(),
-        ENV_DB_PASSWORD_KEY: Joi.string().required(),
-        ENV_DB_DATABASE_KEY: Joi.string().required(),
-        DB_SYNC: Joi.boolean().required(),
-      }),
     }),
-    TypeOrmModule.forRootAsync(typeOrmModuleOptions),
-    UsersModule,
+    TypeOrmModule.forRoot({
+      type: "postgres",
+      host: process.env[ENV_DB_HOST_KEY],
+      port: parseInt(process.env[ENV_DB_PORT_KEY]),
+      username: process.env[ENV_DB_USERNAME_KEY],
+      password: process.env[ENV_DB_PASSWORD_KEY],
+      database: process.env[ENV_DB_DATABASE_KEY],
+      entities: [
+        Board,
+        Users,
+        CardWorkers,
+        Cards,
+        CheckList,
+        Columns,
+        BaseModel,
+        Check_current,
+        Comments,
+        BoardMember,
+      ],
+      synchronize: true,
+      logging: true,
+    }),
+    AuthModule,
     BoardsModule,
-    ColumnsModule,
     CardsModule,
+    ColumnsModule,
     CommonModule,
+    UsersModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
+//adfasfsdaf
+//adfasfadff
+//adfasdf

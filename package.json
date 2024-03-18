@@ -47,10 +47,7 @@
     "papaparse": "^5.4.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
-<<<<<<< HEAD
     "pg": "^8.11.3",
-=======
->>>>>>> 7e928ef93702263d31def82a9a1276be53df69c3
     "reflect-metadata": "^0.2.1",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.20",

@@ -8,7 +8,6 @@ import { Column, Entity, OneToMany } from "typeorm";
   name: "users",
 })
 export class Users extends BaseModel {
-
   @Column({ type: "varchar", nullable: false })
   email: string;
 
@@ -36,5 +35,4 @@ export class Users extends BaseModel {
     onDelete: "CASCADE",
   })
   boardmember: BoardMember[];
-
 }

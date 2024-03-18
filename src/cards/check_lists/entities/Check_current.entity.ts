@@ -1,4 +1,3 @@
-
 import { BaseModel } from "src/common/entities/basemodel.entitiy";
 import { Column, Entity } from "typeorm";
 
@@ -6,7 +5,7 @@ import { Column, Entity } from "typeorm";
   name: "check_current",
 })
 export class Check_current extends BaseModel {
-  @Column({ type: "number", unique: true, nullable: false })
+  @Column({ type: "bigint", unique: true, nullable: false })
   checkId: number;
 
   @Column({ type: "varchar", nullable: false })
