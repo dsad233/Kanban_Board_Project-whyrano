@@ -6,7 +6,6 @@ import { BoardsModule } from './boards/boards.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { CommonModule } from './common/common.module';
-import { CommonModule } from './common/common.module';
 import Joi from 'joi';
 
 const typeOrmModuleOptions = {
@@ -41,11 +40,11 @@ const typeOrmModuleOptions = {
       }),
     }),
     TypeOrmModule.forRootAsync(typeOrmModuleOptions),
-    UsersModule, 
-    BoardsModule, 
-    ColumnsModule, 
+    UsersModule,
+    BoardsModule,
+    ColumnsModule,
     CardsModule, CommonModule],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
