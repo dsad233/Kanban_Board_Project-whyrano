@@ -1,10 +1,10 @@
+
 import { IsString } from "class-validator";
 import { BaseModel } from "src/common/entities/base.entity";
-import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Color } from "src/common/types/color.type";
+import { Column } from "typeorm";
 
 export abstract class Coulm extends BaseModel {
-    @PrimaryGeneratedColumn()
-    id: number;
 
     @IsString()
     @Column({ unsigned: true })
@@ -13,11 +13,9 @@ export abstract class Coulm extends BaseModel {
     @Column()
     title: string;
 
-    @Column({ type: enum })
-    color
+    @Column({ type: 'enum', enum: Color, default: Color.BLACK })
+    color: Color;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
-    @CreateDateColumn()
-    createdAt: Date;
+    @Column({ type: 'number', nullable: false })
+    orderByColumns: number;
 }
