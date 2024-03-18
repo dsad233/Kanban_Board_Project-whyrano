@@ -1,3 +1,4 @@
+
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Color } from "src/common/types/color.type";
 import { CardWorker } from "./cardworker.entity";

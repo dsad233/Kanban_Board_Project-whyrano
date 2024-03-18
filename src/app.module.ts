@@ -8,22 +8,33 @@ import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
 
 import Joi from "joi";
 import { Module } from "@nestjs/common";
+import { Board } from "./boards/entities/board.entity";
+import { Cards } from "./cards/entities/card.entity";
+import { Columns } from "./columns/entities/column.entity";
+import { Comments } from "./cards/comments/entities/comment.entity";
+import { Check_current } from "./cards/check_lists/entities/Check_current.entity";
+import { CheckList } from "./cards/check_lists/entities/check_list.entity";
+import { CardWorker } from "./cards/entities/cardworker.entity";
 
 const typeOrmModuleOptions = {
   useFactory: async (
     configService: ConfigService,
   ): Promise<TypeOrmModuleOptions> => ({
-    type: "mysql",
-    host: configService.get("DB_HOST"),
-    port: configService.get("DB_PORT"),
-    username: configService.get("DB_USERNAME"),
-    password: configService.get("DB_PASSWORD"),
-    database: configService.get("DB_NAME"),
-    entities: [],
-    synchronize: configService.get("DB_SYNC"),
+
+    entities: [
+      Board,
+      Cards,
+      CardWorker,
+      Columns,
+      Comments,
+      Check_current,
+      CheckList,
+    ],
+    synchronize: true,
     logging: true,
   }),
   inject: [ConfigService],
+
 };
 
 @Module({
@@ -32,11 +43,11 @@ const typeOrmModuleOptions = {
       isGlobal: true,
       validationSchema: Joi.object({
         JWT_SECRET_KEY: Joi.string().required(),
-        DB_HOST: Joi.string().required(),
-        DB_PORT: Joi.number().required(),
-        DB_USERNAME: Joi.string().required(),
-        DB_PASSWORD: Joi.string().required(),
-        DB_NAME: Joi.string().required(),
+        ENV_DB_HOST_KEY: Joi.string().required(),
+        ENV_DB_PORT_KEY: Joi.number().required(),
+        ENV_DB_USERNAME_KEY: Joi.string().required(),
+        ENV_DB_PASSWORD_KEY: Joi.string().required(),
+        ENV_DB_DATABASE_KEY: Joi.string().required(),
         DB_SYNC: Joi.boolean().required(),
       }),
     }),

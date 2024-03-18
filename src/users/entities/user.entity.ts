@@ -36,4 +36,5 @@ export class Users extends BaseModel {
     onDelete: "CASCADE",
   })
   boardmember: BoardMember[];
+
 }

@@ -35,4 +35,6 @@ export class BoardMember {
 
   @OneToMany(() => CardWorker, (cardworker) => cardworker.boardmember)
   cardworker: CardWorker[];
+
 }
+
