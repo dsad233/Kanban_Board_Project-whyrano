@@ -43,6 +43,7 @@ import { Columns } from "src/columns/entities/column.entity";
     })
     cardworker: CardWorker[];
 
+
     @ManyToOne(() => Columns, (column) => column.cards, {
       nullable: false,
       onDelete: 'CASCADE',
@@ -50,3 +51,4 @@ import { Columns } from "src/columns/entities/column.entity";
     @JoinColumn({ name: 'columnId', referencedColumnName: 'id'})
     column: Columns
   }
+

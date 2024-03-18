@@ -31,5 +31,7 @@ export class Board extends BaseModel {
 
   @OneToMany(() => Columns, (column) => column.board)
   column: Columns[];
+
   
 }
+

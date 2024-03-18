@@ -9,7 +9,6 @@ declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('Sleact API')
@@ -37,11 +36,12 @@ async function bootstrap() {
   const port = process.env.PORT || 3095;
   await app.listen(port);
   console.log(`listening on port ${port}`);
-  
+
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
+
 
   bootstrap();
 }
