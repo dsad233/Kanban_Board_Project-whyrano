@@ -11,15 +11,15 @@ import { Columns } from "src/columns/entities/column.entity";
     name: 'cards',
   })
   export class Cards extends BaseModel{
-  
-    @Column({ type: 'number', unique: true, nullable: false })
+
+    @Column({ type: 'number', unique: true, nullable: false,  name: 'column_Id'})
     columnId: number;
   
     @Column({ type: 'varchar', nullable: false })
     title: string;
   
     @Column({ type: 'enum', nullable: false, default: "BLACK" })
-    color: Color; //진영님꺼 가져오기
+    color: Color;
 
     @Column({ type: 'varchar', nullable: false })
     content: string;
@@ -49,6 +49,7 @@ import { Columns } from "src/columns/entities/column.entity";
     })
     @JoinColumn({ name: 'columnId', referencedColumnName: 'id'})
     column: Columns
+    userId: number;
   }
 
 

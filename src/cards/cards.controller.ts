@@ -28,19 +28,19 @@ export class CardsController {
   
   // 카드 상세 조회
   @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.cardsService.findOne(+id);
+  async findCard(@Param("id") id: string) {
+    return this.cardsService.getCardsById(+id);
   }
 
   // 카드 생성
-  @Post()
+  @Post(':cardId')
   async createCard(
     @UserInfo() user: Users,
     @Param('cardId') cardId: number,
     @Body() CreateCardDto: CreateCardDto,
   ) {
     await this.cardsService.createCard(
-      userInfo.name,
+      user.id,
       CreateCardDto.content,
     );
   }
@@ -53,13 +53,12 @@ export class CardsController {
     @Body() UpdateCardDto: UpdateCardDto,
   ) {
     await this.cardsService.updateCard(
-      userInfo.name,
+      user.id,
       UpdateCardDto.content,
     );
   }
 
-  // 카드 순서변경 & 이동
-  /* 코드 */
+
 
   // 카드 삭제
   @Delete(":id")
@@ -68,6 +67,19 @@ export class CardsController {
     @Param('id') id: number) {
     await this.cardsService.deleteCard(id, user.id);
   }
+
+  // 작업자 할당
+
+
+
+  // 작업자 변경
+
+
+
+  // 칼럼 내 위치 변경
+
+
+
 }
 
 function UserInfo(): (target: CardsController, propertyKey: "createCard", parameterIndex: 0) => void {
